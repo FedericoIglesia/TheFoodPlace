@@ -17,12 +17,34 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require("./src/app.js");
+const { conn, Diet } = require("./src/db.js");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log("%s listening at 3001"); // eslint-disable-line no-console
+
+    //copying all diets from https://spoonacular.com/food-api/docs#Diets to load into DB.
+    const diets = [
+      "gluten free",
+      "ketogenic",
+      "vegetarian",
+      "lacto-vegetarian",
+      "ovo-vegetarian",
+      "vegan",
+      "pescetarian",
+      "paleo",
+      "primal",
+      "low fodmap",
+      "whole30",
+    ];
+
+    diets.forEach(
+      async (diet) => await Diet.findOrCreate({ where: { name: diet } })
+    );
+    // diets.forEach((diet) => Diet.findOrCreate({ where: { name: diet } }));
+
+    // Promise.all([diets]).then(() => console.log("OK"));
   });
 });

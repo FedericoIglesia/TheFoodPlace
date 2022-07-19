@@ -24,7 +24,7 @@ const getApiInfo = async () => {
         id: el.id,
         name: el.title,
         summary: el.summary,
-        dietType: el.dietType,
+        dietType: el.diets,
         dishType: el.dishType,
         healthScore: el.healthScore,
         steps:
@@ -67,7 +67,7 @@ const getEverything = async () => {
 
     return AllInfo;
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
 };
 
@@ -87,6 +87,17 @@ router.get("/recipes", async (req, res) => {
   } else {
     res.send(allRecipes);
   }
+});
+
+router.get("/recipes/:id", async (req, res) => {
+  const { id } = req.params;
+  let allData = await getEverything();
+
+  let finding = allData.find((e) => e.id === id);
+
+  if (finding) {
+    res.send(finding);
+  } else res.status(404).send("ERROR");
 });
 
 module.exports = router;
