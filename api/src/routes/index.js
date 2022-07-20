@@ -90,14 +90,59 @@ router.get("/recipes", async (req, res) => {
 });
 
 router.get("/recipes/:id", async (req, res) => {
-  const { id } = req.params;
-  let allData = await getEverything();
+  try {
+    const { id } = req.params;
 
-  let finding = allData.find((e) => e.id === id);
+    const recipeFromApi = await axios.get(
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+    );
+    const recipeFromDb = await Recipe.findByPk(id);
 
-  if (finding) {
-    res.send(finding);
-  } else res.status(404).send("ERROR");
+    if (recipeFromDb) {
+      res.send(recipeFromDb);
+    } else if (recipeFromApi) res.send(recipeFromApi);
+    else res.status(404).send("ID does not exist");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/recipes", async (req, res) => {
+  let { name, summary, healthScore, steps, createdInDb, diet } = req.body;
+  let recipeCreated = await Recipe.create({
+    name,
+    summary,
+    healthScore,
+    steps,
+    createdInDb,
+  });
+
+  let dietDb = await Diet.findAll({
+    where: { name: diet },
+  });
+
+  recipeCreated.addDiet(dietDb);
+  res.send("Recipe successfully created");
+});
+
+router.get("/diets", async (req, res) => {
+  //Getting all diets from the API and loading them into the DB ==>  (i don't get all diets according to the Read me so i manually loaded them in the sync method)
+  // const dietsFromApi = await axios.get(
+  //   `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=1000`
+  // );
+
+  // const diets = await dietsFromApi.data.results
+  //   .filter((r) => r.diets)
+  //   .flat()
+  //   .forEach(
+  //     async (diet) => await Diet.findOrCreate({ where: { name: diet } })
+  //   );
+  try {
+    const dietsFromDb = await Diet.findAll();
+    res.send(dietsFromDb);
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 module.exports = router;

@@ -43,6 +43,7 @@ conn.sync({ force: true }).then(() => {
     diets.forEach(
       async (diet) => await Diet.findOrCreate({ where: { name: diet } })
     );
+
     // diets.forEach((diet) => Diet.findOrCreate({ where: { name: diet } }));
 
     // Promise.all([diets]).then(() => console.log("OK"));
