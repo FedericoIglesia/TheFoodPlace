@@ -24,7 +24,7 @@ const getApiInfo = async () => {
         id: el.id,
         name: el.title,
         summary: el.summary,
-        dietType: el.diets,
+        diets: el.diets,
         dishType: el.dishType,
         healthScore: el.healthScore,
         steps:
@@ -90,18 +90,53 @@ router.get("/recipes", async (req, res) => {
 });
 
 router.get("/recipes/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
+    if (id.length > 31) {
+      const dbId = await Recipe.findByPk(id, {
+        include: {
+          model: Diet,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      });
 
-    const recipeFromApi = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-    );
-    const recipeFromDb = await Recipe.findByPk(id);
+      if (dbId) {
+        const dbInfo = {
+          id: dbId.id,
+          name: dbId.name,
+          summary: dbId.summary,
+          healthScore: dbId.healthScore,
+          steps: dbId.steps,
+          diets: dbId.diets,
+        };
 
-    if (recipeFromDb) {
-      res.send(recipeFromDb);
-    } else if (recipeFromApi) res.send(recipeFromApi);
-    else res.status(404).send("ID does not exist");
+        res.json(dbInfo);
+      } else res.status(404).send("There is no recipe for the provided ID");
+    } else {
+      const apiId = await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      );
+
+      let results = apiId.data;
+      let recipe = {
+        id: results.id,
+        name: results.title,
+        summary: results.summary,
+        diets: results.diets,
+        dishType: results.dishType,
+        healthScore: results.healthScore,
+        steps:
+          results.analyzedInstructions[0] &&
+          results.analyzedInstructions[0].steps
+            ? results.analyzedInstructions[0].steps.map((s) => s)
+            : "",
+      };
+      if (recipe) res.json(recipe);
+      else res.status(404).send("There is no recipe for the provided ID");
+    }
   } catch (err) {
     console.log(err);
   }
@@ -128,7 +163,7 @@ router.post("/recipes", async (req, res) => {
 router.get("/diets", async (req, res) => {
   //Getting all diets from the API and loading them into the DB ==>  (i don't get all diets according to the Read me so i manually loaded them in the sync method)
   // const dietsFromApi = await axios.get(
-  //   `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=1000`
+  //   `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
   // );
 
   // const diets = await dietsFromApi.data.results
@@ -137,6 +172,7 @@ router.get("/diets", async (req, res) => {
   //   .forEach(
   //     async (diet) => await Diet.findOrCreate({ where: { name: diet } })
   //   );
+
   try {
     const dietsFromDb = await Diet.findAll();
     res.send(dietsFromDb);

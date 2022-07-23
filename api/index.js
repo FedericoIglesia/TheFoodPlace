@@ -25,7 +25,7 @@ conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
 
-    //copying all diets from https://spoonacular.com/food-api/docs#Diets to load into DB.
+    // copying all diets from https://spoonacular.com/food-api/docs#Diets to load into DB.
     const diets = [
       "gluten free",
       "ketogenic",
@@ -33,7 +33,7 @@ conn.sync({ force: true }).then(() => {
       "lacto-vegetarian",
       "ovo-vegetarian",
       "vegan",
-      "pescetarian",
+      "pescatarian",
       "paleo",
       "primal",
       "low fodmap",
