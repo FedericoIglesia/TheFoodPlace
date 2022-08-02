@@ -20,6 +20,7 @@ const getApiInfo = async () => {
         summary: el.summary,
         diets: el.diets,
         dishType: el.dishType,
+        image: el.image,
         healthScore: el.healthScore,
         steps:
           el.analyzedInstructions[0] && el.analyzedInstructions[0].steps
@@ -137,21 +138,35 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  //destructuring the req via body
   let { name, summary, healthScore, steps, createdInDb, diet } = req.body;
-  let recipeCreated = await Recipe.create({
-    name,
-    summary,
-    healthScore,
-    steps,
-    createdInDb,
+
+  //searching for previous entries to the db that match what will be submitted
+  let checks = await Recipe.findAll({
+    where: {
+      name,
+      summary,
+      healthScore,
+      steps,
+    },
   });
 
-  let dietDb = await Diet.findAll({
-    where: { name: diet },
-  });
+  //if a previous entry with the same information exists, posting is not allowed and user is advised about it. The idea is to prevent duplicate recipes being stored in the database.
+  if (!checks.length) {
+    let recipeCreated = await Recipe.create({
+      name,
+      summary,
+      healthScore,
+      steps,
+      createdInDb,
+    });
+    let dietDb = await Diet.findAll({
+      where: { name: diet },
+    });
 
-  recipeCreated.addDiet(dietDb);
-  res.send("Recipe successfully created");
+    recipeCreated.addDiet(dietDb);
+    res.send("Recipe successfully created");
+  } else res.status(409).send("This recipe already exists!");
 });
 
 module.exports = router;
