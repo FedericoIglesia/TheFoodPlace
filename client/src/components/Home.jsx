@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByDiets, getRecipes } from "../actions";
+import { filterByDiets, getRecipes, orderByName } from "../actions";
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import Pagination from "./Pagination";
@@ -36,13 +36,17 @@ export default function Home() {
     dispatch(filterByDiets(e.target.value));
   }
 
+  function handleOrderByName(e) {
+    dispatch(orderByName(e.target.value));
+  }
+
   return (
     <div>
       <Link to="/recipes">Create New Recipe</Link>
       <h1>The Food Place</h1>
       <button onClick={handleClick}>Reload all recipes</button>
       <div>
-        <select>
+        <select onChane={orderByName}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
@@ -56,16 +60,18 @@ export default function Home() {
           <option value="allTypes">All Diet Types</option>
           <option value="gluten free">Gluten Free</option>
           <option value="ketogenic">Ketogenic</option>
-          <option value="lacto-vegetarian">Lacto-Vegetarian</option>
-          <option value="ovo-vegetarian">Ovo-Vegetarian</option>
+          <option value="lacto ovo vegetarian">Lacto Ovo Vegetarian</option>
+          <option value="dairy free">Dairy Free</option>
           <option value="vegetarian">Vegetarian</option>
           <option value="vegan">Vegan</option>
           <option value="pescatarian">Pescatarian</option>
           <option value="paleo">Paleo</option>
           <option value="primal">Primal</option>
-          <option value="low fodmap">Low Fodmap</option>
-          <option value="whole30">Whole30</option>
+          <option value="whole 30">Whole30</option>
+          <option value="paleolithic">Paleolithic</option>
+          <option value="fodmap friendly">Fodmap Friendly</option>
         </select>
+        {}
         {currentRecipes?.map((r) => {
           return (
             <>

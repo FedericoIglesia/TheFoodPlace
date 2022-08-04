@@ -1,6 +1,7 @@
 import axios from "axios";
 export const GET_RECIPES = "GET_RECIPES";
 export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -13,9 +14,16 @@ export function getRecipes() {
 }
 
 export function filterByDiets(payload) {
-  console.log(payload);
+  // console.log(payload);
   return {
     type: FILTER_BY_DIETS,
+    payload,
+  };
+}
+
+export function orderByName(payload) {
+  return {
+    type: ORDER_BY_NAME,
     payload,
   };
 }
