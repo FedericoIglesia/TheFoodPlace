@@ -30,14 +30,15 @@ conn.sync({ force: true }).then(() => {
       "gluten free",
       "ketogenic",
       "vegetarian",
-      "lacto-vegetarian",
-      "ovo-vegetarian",
+      "lacto ovo vegetarian",
+      "dairy free",
       "vegan",
       "pescatarian",
       "paleo",
       "primal",
-      "low fodmap",
       "whole30",
+      "paleolithic",
+      "fodmap firendly",
     ];
 
     diets.forEach(

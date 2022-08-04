@@ -31,7 +31,20 @@ const getApiInfo = async () => {
 
     return apiInfo;
   } catch (err) {
-    console.log(err);
+    console.log(`
+    
+
+                  API KEY EXPIRED
+    
+                  
+                ***CHANGE API KEY*** 
+     
+
+    ${err.response.data.message} 
+    
+    
+    
+  `);
   }
 };
 
@@ -62,13 +75,14 @@ const getEverything = async () => {
 
     return AllInfo;
   } catch (err) {
-    console.log(err);
+    console.log(err + "__________CHANGE API KEY");
   }
 };
 
 // doing the get route for recipes. This route could be followed by a query, taking that into account as well.
 router.get("/", async (req, res) => {
   const name = req.query.name;
+
   let allRecipes = await getEverything();
 
   //if there's a query, filter all recipes containing that name. Making sure to compare lowercase names from the query with lowercase names from the total recipes data.
