@@ -34,6 +34,7 @@ function rootReducer(state = initialState, action) {
                 if (recipe.diets.find((diet) => diet === action.payload))
                   return recipe;
               }
+              return null;
             });
       return {
         ...state,
@@ -78,6 +79,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         recipes: action.payload,
       };
+
     default:
       return state;
   }

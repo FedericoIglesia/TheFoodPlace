@@ -1,29 +1,28 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchRecipes } from "../actions";
 
 function SearchBar() {
   const dispatch = useDispatch();
+
   const [name, setName] = useState("");
 
-  function handleSearch(e) {
-    e.preventDefault();
+  function handleInput(e) {
     setName(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault(e);
     dispatch(searchRecipes(name));
     setName("");
-  };
+  }
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <input
         type="text"
         placeholder="Search for dozens of recipes"
-        onChange={(e) => handleSearch(e)}
+        onChange={(e) => handleInput(e)}
       />
       <button type="submit">Search</button>
     </form>

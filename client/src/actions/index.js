@@ -38,12 +38,19 @@ export function orderByScore(payload) {
   };
 }
 
-export function searchRecipes(payload) {
+export function searchRecipes(name) {
   return async function (dispatch) {
-    let response = axios.get("http://localhost:3001/recipes?name=" + payload);
-    return dispatch({
-      type: SEARCH_NAME_RECIPES,
-      payload: response.data,
-    });
+    try {
+      let response = await axios.get(
+        `http://localhost:3001/recipes?name=${name}`
+      );
+      console.log(response.data);
+      return dispatch({
+        type: SEARCH_NAME_RECIPES,
+        payload: response.data,
+      });
+    } catch (err) {
+      console.log("no recipe  " + err);
+    }
   };
 }

@@ -15,15 +15,16 @@ export default function Home() {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   //setting up local states for the pagination
+
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(9);
   const [order, setOrder] = useState("");
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOffirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   //getting the recipes from the global state by slicing the state array by the index. Since i'm slicing up to the 9th index(not included) i'm getting 9 recipes per page
   const currentRecipes = allRecipes.slice(
-    indexOffirstRecipe,
+    indexOfFirstRecipe,
     indexOfLastRecipe
   );
 
@@ -33,9 +34,10 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getRecipes());
-  }, []);
+  }, [dispatch]);
 
   function handleClick() {
+    console.log(currentRecipes);
     dispatch(getRecipes());
   }
 
