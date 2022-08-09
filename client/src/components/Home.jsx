@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByDiets, getRecipes, orderByName } from "../actions";
+import {
+  filterByDiets,
+  getRecipes,
+  orderByName,
+  orderByScore,
+} from "../actions";
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import Pagination from "./Pagination";
+import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -11,6 +17,7 @@ export default function Home() {
   //setting up local states for the pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(9);
+  const [order, setOrder] = useState("");
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOffirstRecipe = indexOfLastRecipe - recipesPerPage;
@@ -37,22 +44,33 @@ export default function Home() {
   }
 
   function handleOrderByName(e) {
+    // e.preventDefault();
     dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrder(`${e.target.value}`);
+  }
+
+  function handleOrderByScore(e) {
+    dispatch(orderByScore(e.target.value));
+    setCurrentPage(1);
+    setOrder(`${e.target.value}`);
   }
 
   return (
     <div>
       <Link to="/recipes">Create New Recipe</Link>
       <h1>The Food Place</h1>
-      <button onClick={handleClick}>Reload all recipes</button>
+      <SearchBar />
+      <button onClick={(e) => handleClick(e)}>Reload all recipes</button>{" "}
+      {/*  REVISAR */}
       <div>
-        <select onChane={orderByName}>
+        <select onChange={(e) => handleOrderByName(e)}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
-        <select>
-          <option value="asc">Greater Health Score</option>
-          <option value="desc">Lower Health Score</option>
+        <select onChange={(e) => handleOrderByScore(e)}>
+          <option value="up">Greater Health Score</option>
+          <option value="down">Lower Health Score</option>
         </select>
 
         {/* //can i map these below from my records in the db?} */}
@@ -71,12 +89,17 @@ export default function Home() {
           <option value="paleolithic">Paleolithic</option>
           <option value="fodmap friendly">Fodmap Friendly</option>
         </select>
-        {}
         {currentRecipes?.map((r) => {
           return (
             <>
               <Link to={"/home/" + r.id}>
-                <Recipe image={r.image} name={r.name} diets={r.diets} />;
+                <Recipe
+                  image={r.image}
+                  name={r.name}
+                  diets={r.diets}
+                  key={r.id}
+                />
+                ;
               </Link>
             </>
           );
@@ -86,6 +109,7 @@ export default function Home() {
         recipesPerPage={recipesPerPage}
         allRecipes={allRecipes.length}
         pages={pages}
+        key={pages}
       />
     </div>
   );

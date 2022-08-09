@@ -1,4 +1,10 @@
-import { FILTER_BY_DIETS, GET_RECIPES, ORDER_BY_NAME } from "../actions";
+import {
+  FILTER_BY_DIETS,
+  GET_RECIPES,
+  ORDER_BY_NAME,
+  ORDER_BY_SCORE,
+  SEARCH_NAME_RECIPES,
+} from "../actions";
 
 const initialState = {
   recipes: [],
@@ -13,6 +19,7 @@ function rootReducer(state = initialState, action) {
         recipes: action.payload,
         totalRecipes: action.payload,
       };
+
     case FILTER_BY_DIETS:
       const allRecipes = state.totalRecipes;
       const filteredStatus =
@@ -32,11 +39,45 @@ function rootReducer(state = initialState, action) {
         ...state,
         recipes: filteredStatus,
       };
+
     case ORDER_BY_NAME:
-      const order = action.payload;
-      if (order === "asc") {
-        order.sort();
-      }
+      const sortedName =
+        action.payload === "asc"
+          ? state.totalRecipes.sort((a, b) => {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+              else return -1;
+            })
+          : state.totalRecipes.sort((a, b) => {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+              else return 1;
+            });
+      return {
+        ...state,
+        recipes: sortedName,
+      };
+
+    case ORDER_BY_SCORE:
+      const sortedScore =
+        action.payload === "up"
+          ? state.totalRecipes.sort((a, b) => {
+              if (a.score > b.score) return -1;
+              else return 1;
+            })
+          : state.totalRecipes.sort((a, b) => {
+              if (a.score > b.score) return 1;
+              else return -1;
+            });
+
+      return {
+        ...state,
+        recipes: sortedScore,
+      };
+
+    case SEARCH_NAME_RECIPES:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
     default:
       return state;
   }

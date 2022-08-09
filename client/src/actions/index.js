@@ -2,6 +2,8 @@ import axios from "axios";
 export const GET_RECIPES = "GET_RECIPES";
 export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
+export const SEARCH_NAME_RECIPES = "SEARCH_NAME_RECIPES";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -22,8 +24,26 @@ export function filterByDiets(payload) {
 }
 
 export function orderByName(payload) {
+  console.log(payload);
   return {
     type: ORDER_BY_NAME,
     payload,
+  };
+}
+
+export function orderByScore(payload) {
+  return {
+    type: ORDER_BY_SCORE,
+    payload,
+  };
+}
+
+export function searchRecipes(payload) {
+  return async function (dispatch) {
+    let response = axios.get("http://localhost:3001/recipes?name=" + payload);
+    return dispatch({
+      type: SEARCH_NAME_RECIPES,
+      payload: response.data,
+    });
   };
 }
