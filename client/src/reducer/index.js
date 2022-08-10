@@ -4,11 +4,15 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_SCORE,
   SEARCH_NAME_RECIPES,
+  SEARCH_NAME_RECIPES_REJECTED,
+  GET_DIETS,
+  POST_RECIPE,
 } from "../actions";
 
 const initialState = {
   recipes: [],
   totalRecipes: [], //saving the total list of recipes to avoid issues with the filtering
+  diets: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -58,14 +62,15 @@ function rootReducer(state = initialState, action) {
       };
 
     case ORDER_BY_SCORE:
+      let allScores = state.totalRecipes;
       const sortedScore =
         action.payload === "up"
-          ? state.totalRecipes.sort((a, b) => {
-              if (a.score > b.score) return -1;
-              else return 1;
-            })
-          : state.totalRecipes.sort((a, b) => {
+          ? state.recipes.sort((a, b) => {
               if (a.score > b.score) return 1;
+              else return -1;
+            })
+          : state.recipes.sort((a, b) => {
+              if (a.score < b.score) return 1;
               else return -1;
             });
 
@@ -78,6 +83,23 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: action.payload,
+      };
+
+    case SEARCH_NAME_RECIPES_REJECTED:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+
+    case POST_RECIPE:
+      return {
+        ...state,
+      };
+
+    case GET_DIETS:
+      return {
+        ...state,
+        diets: action.payload,
       };
 
     default:
