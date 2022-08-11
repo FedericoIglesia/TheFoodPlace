@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
   try {
     const dietsFromDb = await Diet.findAll();
-    res.send(dietsFromDb);
+    res.send(dietsFromDb.map((d) => d.name));
   } catch (err) {
     res.status(404).send(err);
   }

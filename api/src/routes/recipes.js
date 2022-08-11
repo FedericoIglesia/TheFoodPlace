@@ -86,6 +86,7 @@ router.get("/", async (req, res) => {
   let allRecipes = await getEverything();
 
   //if there's a query, filter all recipes containing that name. Making sure to compare lowercase names from the query with lowercase names from the total recipes data.
+
   if (name) {
     let recipeName = await allRecipes.filter((a) =>
       a.name.toLowerCase().includes(name.toLowerCase())
