@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
+import NotFound from "./NotFound";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Home() {
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   //getting the recipes from the global state by slicing the state array by the index. Since i'm slicing up to the 9th index(not included) i'm getting 9 recipes per page
+
   const currentRecipes = allRecipes.slice(
     indexOfFirstRecipe,
     indexOfLastRecipe
@@ -60,21 +62,28 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/recipes">Create New Recipe</Link>
+      <Link to="/recipe">Create New Recipe</Link>
       <h1>The Food Place</h1>
       <SearchBar />
       <button onClick={(e) => handleClick(e)}>Reload all recipes</button>{" "}
-      {/*  REVISAR */}
       <div>
-        <select onChange={(e) => handleOrderByName(e)}>
+        <select onChange={(e) => handleOrderByName(e)} defaultValue={"default"}>
+          <option disabled value="default">
+            Order By Name
+          </option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
-        <select onChange={(e) => handleOrderByScore(e)}>
+        <select
+          onChange={(e) => handleOrderByScore(e)}
+          defaultValue={"default"}
+        >
+          <option value="default" disabled>
+            Order By Health Score
+          </option>
           <option value="up">Greater Health Score</option>
           <option value="down">Lower Health Score</option>
         </select>
-
         {/* //can i map these below from my records in the db?} */}
         <select onChange={(e) => handleDietFilter(e)}>
           <option value="allTypes">All Diet Types</option>
@@ -91,28 +100,40 @@ export default function Home() {
           <option value="paleolithic">Paleolithic</option>
           <option value="fodmap friendly">Fodmap Friendly</option>
         </select>
-        {currentRecipes?.map((r) => {
-          return (
-            <>
-              <Link to={"/home/" + r.id}>
-                <Recipe
-                  image={r.image}
-                  name={r.name}
-                  diets={r.diets}
-                  key={r.id}
-                />
-                ;
-              </Link>
-            </>
-          );
-        })}
+        {allRecipes === "ERR" ? (
+          <NotFound />
+        ) : (
+          currentRecipes?.map((r) => {
+            return (
+              <>
+                <Link to={"/home/" + r.id}>
+                  <Recipe
+                    image={
+                      r.image
+                        ? r.image
+                        : "https://thesmartwander.com/wp-content/uploads/2020/09/how-to-draw-food-3-1024x1024.jpg"
+                    }
+                    name={r.name}
+                    diets={r.diets}
+                    key={r.id}
+                  />
+                  ;
+                </Link>
+              </>
+            );
+          })
+        )}
       </div>
-      <Pagination
-        recipesPerPage={recipesPerPage}
-        allRecipes={allRecipes.length}
-        pages={pages}
-        key={pages}
-      />
+      {allRecipes !== "ERR" && (
+        <Pagination
+          recipesPerPage={recipesPerPage}
+          allRecipes={allRecipes.length}
+          pages={pages}
+          key={pages}
+        />
+      )}
     </div>
   );
 }
+
+// "https://www.fao.org/3/a0104e/a0104e0c.jpg";

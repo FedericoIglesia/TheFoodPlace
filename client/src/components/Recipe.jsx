@@ -4,6 +4,7 @@ export default function Recipe({ image, name, diets }) {
   //destructuring from props
 
   //the diet types from the API come in as an array of strings, while from the DB they come in as an array of objects. Doing a conditional rendering below depending on the source of information.
+
   let obj = diets.map((d) => d.name + ", ");
   let str = diets.map((d) => d + ", ");
 

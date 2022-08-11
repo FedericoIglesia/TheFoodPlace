@@ -13,8 +13,10 @@ function SearchBar() {
 
   function handleSubmit(e) {
     e.preventDefault(e);
-    dispatch(searchRecipes(name));
-    setName("");
+    if (name) {
+      dispatch(searchRecipes(name));
+      setName("");
+    }
   }
 
   return (
@@ -23,6 +25,7 @@ function SearchBar() {
         type="text"
         placeholder="Search for dozens of recipes"
         onChange={(e) => handleInput(e)}
+        value={name}
       />
       <button type="submit">Search</button>
     </form>

@@ -62,7 +62,6 @@ function rootReducer(state = initialState, action) {
       };
 
     case ORDER_BY_SCORE:
-      let allScores = state.totalRecipes;
       const sortedScore =
         action.payload === "up"
           ? state.recipes.sort((a, b) => {
