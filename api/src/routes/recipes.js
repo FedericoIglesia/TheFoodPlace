@@ -136,8 +136,9 @@ router.get("/:id", async (req, res) => {
         name: results.title,
         summary: results.summary,
         diets: results.diets,
-        dishType: results.dishType,
+        dishTypes: results.dishTypes,
         healthScore: results.healthScore,
+        image: results.image,
         steps:
           results.analyzedInstructions[0] &&
           results.analyzedInstructions[0].steps
@@ -160,9 +161,6 @@ router.post("/", async (req, res) => {
   let checks = await Recipe.findAll({
     where: {
       name,
-      summary,
-      healthScore,
-      steps,
     },
   });
 

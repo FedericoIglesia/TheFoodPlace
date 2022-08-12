@@ -38,7 +38,7 @@ conn.sync({ force: true }).then(() => {
       "primal",
       "whole30",
       "paleolithic",
-      "fodmap firendly",
+      "fodmap friendly",
     ];
 
     diets.forEach(
