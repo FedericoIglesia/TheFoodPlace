@@ -157,6 +157,16 @@ router.post("/", async (req, res) => {
   //destructuring the req via body
   let { name, summary, healthScore, steps, createdInDb, diet } = req.body;
 
+  if (!name) {
+    console.log(`
+    
+    
+      You didn't put a name!
+
+
+    `);
+    res.status(502).send("You need to submit a name!");
+  }
   //searching for previous entries to the db that match what will be submitted
   let checks = await Recipe.findAll({
     where: {
@@ -165,6 +175,7 @@ router.post("/", async (req, res) => {
   });
 
   //if a previous entry with the same information exists, posting is not allowed and user is advised about it. The idea is to prevent duplicate recipes being stored in the database.
+
   if (!checks.length) {
     let recipeCreated = await Recipe.create({
       name,

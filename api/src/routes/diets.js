@@ -6,7 +6,8 @@ const { API_KEY } = process.env;
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
   //   Getting all diets from the API and loading them into the DB ==>  (i don't get all diets according to the Read me so i manually loaded them in the sync method)
   //   const dietsFromApi = await axios.get(
   //     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=900000`
@@ -22,8 +23,10 @@ router.get("/", async (req, res) => {
   //   res.send(diets);
 
   try {
-    const dietsFromDb = await Diet.findAll();
-    res.send(dietsFromDb.map((d) => d.name));
+    // const dietsFromDb = await Diet.findAll();
+    Diet.findAll().then((dietsFromDb) => {
+      res.send(dietsFromDb.map((d) => d.name));
+    });
   } catch (err) {
     res.status(404).send(err);
   }
