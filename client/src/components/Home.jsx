@@ -100,7 +100,9 @@ export default function Home() {
           <option value="paleolithic">Paleolithic</option>
           <option value="fodmap friendly">Fodmap Friendly</option>
         </select>
-        {allRecipes === "ERR" ? (
+        {!currentRecipes.length ? (
+          <p>Loading recipes...</p>
+        ) : allRecipes === "ERR" ? (
           <NotFound />
         ) : (
           currentRecipes?.map((r) => {

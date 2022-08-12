@@ -20,8 +20,15 @@ function RecipeDetails(props) {
       arr = myRecipe.steps.map((s) => s.ingredients.map((i) => i.name));
     }
   }
+
+  //Ingredients is an array of objects, inside an object inside an array, inside another array...
   let unique = [...new Set(arr)];
-  console.log(unique);
+  let unique2 = [...new Set(unique.flat())];
+  console.log(unique2);
+
+  //   const ulStyle = {
+  //     textAlign: "left",
+  //   };
 
   return (
     <div>
@@ -65,18 +72,15 @@ function RecipeDetails(props) {
           </p>
           {typeof myRecipe.steps !== "string" && <h4>Ingredients:</h4>}
           <div>
-            {unique.map((u) =>
-              u.map((un) => {
-                return (
-                  <div>
-                    <ul>
-                      {/* it automatically adds commas! */}
-                      <li>{un}</li>
-                    </ul>
-                  </div>
-                );
-              })
-            )}
+            {unique2.map((u) => {
+              return (
+                <div>
+                  <ul>
+                    <li>{u}</li>
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (

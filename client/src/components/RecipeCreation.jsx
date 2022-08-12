@@ -168,7 +168,6 @@ export default function RecipeCreation() {
                   name="healthScore"
                   key={3}
                   onChange={(e) => handleChange(e)}
-                  required
                 />
               </label>
               {invalidValues.healthScore && (
