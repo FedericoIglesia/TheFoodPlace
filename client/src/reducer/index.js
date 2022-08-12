@@ -7,12 +7,14 @@ import {
   SEARCH_NAME_RECIPES_REJECTED,
   GET_DIETS,
   POST_RECIPE,
+  GET_DETAIL,
 } from "../actions";
 
 const initialState = {
   recipes: [],
   totalRecipes: [], //saving the total list of recipes to avoid issues with the filtering
   diets: [],
+  detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -99,6 +101,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         diets: action.payload,
+      };
+
+    case GET_DETAIL:
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     default:

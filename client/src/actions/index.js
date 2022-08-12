@@ -7,6 +7,8 @@ export const SEARCH_NAME_RECIPES = "SEARCH_NAME_RECIPES";
 export const SEARCH_NAME_RECIPES_REJECTED = "SEARCH_NAME_RECIPES_REJECTED";
 export const GET_DIETS = "GET_DIETS";
 export const POST_RECIPE = "POST_RECIPE";
+export const POST_RECIPE_DUPLICATE = "POST_RECIPE_DUPLICATE";
+export const GET_DETAIL = "GET_DETAIL";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -76,14 +78,19 @@ export function getDiets() {
 export function postRecipe(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/recipes", payload);
-    console.log(`
-    
-          ERRRORR     + ${response}  
-    
-    `);
     return dispatch({
       type: POST_RECIPE,
       payload: response.data,
+    });
+  };
+}
+
+export function getDetail(id) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/recipes/${id}`);
+    return dispatch({
+      type: GET_DETAIL,
+      payload: json.data,
     });
   };
 }
