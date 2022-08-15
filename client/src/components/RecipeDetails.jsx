@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDetail } from "../actions/index";
+import * as r from "./RecipeDetails.module.css";
 
 function RecipeDetails(props) {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function RecipeDetails(props) {
   return (
     <div>
       {Object.keys(myRecipe).length ? (
-        <div>
+        <div className={r["recipe-details-container"]}>
           <img
             src={
               Object.keys(myRecipe).find((i) => i === "image")
@@ -43,22 +44,27 @@ function RecipeDetails(props) {
             alt="Not Found"
             width="300px"
             height="350px"
+            className={r["recipe-details-img"]}
           />
-          <h1>{myRecipe.name}</h1>
-          <h3>
+          <h1 className={r["recipe-details-title"]}>{myRecipe.name}</h1>
+          <h3 className={r["recipe-details-dish"]}>
             {Object.keys(myRecipe).find((e) => e === "dishTypes")
               ? myRecipe.dishTypes.map((dish) => "- " + dish + " -")
               : "No dish types description available for this recipe"}
           </h3>
-          <h3>
+          <h3 className={r["recipe-details-diets"]}>
             {typeof myRecipe.diets[0] === "string"
               ? myRecipe.diets.map((d) => d + " ")
               : myRecipe.diets.map((d) => d.name)}
           </h3>
-          <p>{myRecipe.summary.replace(/<[^>]+>/g, "")}</p>
-          <p>Health Score:{myRecipe.healthScore}</p>
-          <h4>Steps:</h4>
-          <p>
+          <p className={r["recipe-details-summary"]}>
+            {myRecipe.summary.replace(/<[^>]+>/g, "")}
+          </p>
+          <p className={r["recipe-details-score"]}>
+            Health Score:<span>{myRecipe.healthScore}</span>
+          </p>
+          <h4 className={r["recipe-details-steps-title"]}>Steps:</h4>
+          <p className={r["recipe-details-steps"]}>
             {typeof myRecipe.steps === "string"
               ? myRecipe.steps
               : myRecipe.steps.map((s) => (
@@ -70,8 +76,12 @@ function RecipeDetails(props) {
                   </>
                 ))}
           </p>
-          {typeof myRecipe.steps !== "string" && <h4>Ingredients:</h4>}
-          <div>
+          {typeof myRecipe.steps !== "string" && (
+            <h4 className={r["recipe-details-ingredients-title"]}>
+              Ingredients:
+            </h4>
+          )}
+          <div className={r["recipe-details-ingredients"]}>
             {unique2.map((u) => {
               return (
                 <div>
@@ -84,7 +94,10 @@ function RecipeDetails(props) {
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <div className={r["recipe-details-loader-container"]}>
+          <p className={r["recipe-details-loader"]}>Loading recipes...</p>
+          <div class={r["recipe-details-hourglass"]}></div>
+        </div>
       )}
       <Link to="/home">
         <button>Go Back</button>

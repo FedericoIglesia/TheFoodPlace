@@ -1,15 +1,33 @@
+.submit-container {
+  /* display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center; */
+  margin: 6rem auto 6rem auto;
+}
+
+.submit-title {
+  color: var(--bg-fourth);
+  font-size: 6rem;
+  font-family: "Lobster", cursive;
+  text-align: center;
+  /* margin: 0 1rem 0 4rem; */
+  /* animation: slide 2s 1; */
+}
 .submit-img {
   position: relative;
-  left: 0;
-  animation: slide 3s 1;
+  margin-top: 6rem;
+  width: 250px;
+  animation: slide 1.5s 1;
 }
 
 @keyframes slide {
   from {
-    transform: translateX(0%);
+    opacity: 0;
   }
 
   to {
-    transform: translateX(100%);
+    opacity: 1;
+    transform: rotate(360deg);
   }
 }

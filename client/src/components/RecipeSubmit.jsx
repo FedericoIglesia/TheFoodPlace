@@ -1,12 +1,12 @@
 import React from "react";
 import * as s from "./RecipeSubmit.module.css";
-import plane from "../submitted2.png";
+import check from "../submit-check-icon.ico";
 
 function RecipeSubmit() {
   return (
     <div className={s["submit-container"]}>
-      <h1 className={s["submit-title"]}>RECIPE SUBMITTED!!</h1>
-      <img src={plane} className={s["submit-img"]} />
+      <h1 className={s["submit-title"]}>Recipe Submitted!</h1>
+      <img src={check} className={s["submit-img"]} />
     </div>
   );
 }

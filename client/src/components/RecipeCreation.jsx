@@ -10,6 +10,7 @@ import {
 } from "../actions/index";
 import RecipeSubmit from "./RecipeSubmit";
 import DuplicateNote from "./DuplicateNote";
+import * as r from "./RecipeCreation.module.css";
 
 //Creating a controlling function to prevent the user from submitting an invalid post
 function control(input) {
@@ -82,6 +83,9 @@ export default function RecipeCreation() {
   // At the moment of submit i'll check if there's an existing recipe in our global state that matches the one being submitted. If there is, i'll advise the user that it's a duplicate and will not be posted. This is consistent with the duplicate check i did on my backend post route.
   function handleSubmit(e) {
     e.preventDefault();
+    // if (input.name === "") {
+    //   alert("Please complete the name");
+    // }
     dispatch(postRecipe(input));
     setInput({
       name: "",
@@ -114,23 +118,23 @@ export default function RecipeCreation() {
     if (posted === "success" || posted === "duplicate")
       setTimeout(() => {
         setPosted("");
-      }, 20000);
+      }, 4000);
   }, [posted]);
 
   return (
-    <>
+    <div className={r["recipe-create-container"]}>
       {posted === "success" ? (
         <RecipeSubmit />
       ) : posted === "duplicate" ? (
         <DuplicateNote />
       ) : (
-        <div>
+        <div className={r["form-container"]}>
           <Link to="/home">
-            <button>Back To Home</button>
+            <button className={r["form-btn"]}>Back To Home</button>
           </Link>
-          <h1>Submit Your Own Recipe!</h1>
+          <h1 className={r["form-title"]}>Submit Your Own Recipe!</h1>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <div>
+            <div className={r["form-input-container"]}>
               <label>
                 Name:
                 <input
@@ -144,7 +148,7 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.name && (
-                <p className="formInput-errors">{invalidValues.name}</p>
+                <p className={r["form-input-errors"]}>{invalidValues.name}</p>
               )}
               <label>
                 Summary:
@@ -158,7 +162,9 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.summary && (
-                <p className="formInput-errors">{invalidValues.summary}</p>
+                <p className={r["form-input-errors"]}>
+                  {invalidValues.summary}
+                </p>
               )}
               <label>
                 Health Score:
@@ -171,7 +177,9 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.healthScore && (
-                <p className="formInput-errors">{invalidValues.healthScore}</p>
+                <p className={r["form-input-errors"]}>
+                  {invalidValues.healthScore}
+                </p>
               )}
               <label>
                 Steps:
@@ -183,36 +191,40 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.steps && (
-                <p className="formInput-errors">{invalidValues.steps}</p>
+                <p className={r["form-input-errors"]}>{invalidValues.steps}</p>
               )}
               <label>Diet Type:</label>
-              {/* rendering the checkboxes with the diets gotten from the global state */}
-              {dietState.map((d) => (
-                <label>
-                  <input
-                    type="checkbox"
-                    name={d}
-                    value={d}
-                    key={d}
-                    onChange={(e) => handleCheck(e)}
-                  />
-                  {d.charAt(0).toUpperCase() + d.slice(1)}
-                </label>
-              ))}
-              {!input.diet.length && (
-                <p className="formInput-errors">{invalidValues.diet}</p>
-              )}
+              <div className={r["form-checkbox-container"]}>
+                {/* rendering the checkboxes with the diets gotten from the global state */}
+                {dietState.map((d) => (
+                  <label>
+                    <input
+                      type="checkbox"
+                      name={d}
+                      value={d}
+                      key={d}
+                      onChange={(e) => handleCheck(e)}
+                    />
+                    {d.charAt(0).toUpperCase() + d.slice(1)}
+                  </label>
+                ))}
+                {!input.diet.length && (
+                  <p className={r["form-input-errors"]}>{invalidValues.diet}</p>
+                )}
+              </div>
             </div>
             {Object.keys(invalidValues).length && input.diet.length ? (
-              <button type="submit">Submit Recipe</button>
+              <button className={r["form-btn-submit"]} type="submit">
+                Submit Recipe
+              </button>
             ) : (
-              <button type="submit" disabled>
+              <button className={r["form-btn-submit"]} type="submit" disabled>
                 Submit Recipe
               </button>
             )}
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 }

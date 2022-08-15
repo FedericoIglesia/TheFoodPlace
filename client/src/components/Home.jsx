@@ -118,7 +118,10 @@ export default function Home() {
         </button>{" "}
         <div className={h["home-recipes-container"]}>
           {!currentRecipes.length ? (
-            <p className={h["home-recipes-loader"]}>Loading recipes...</p>
+            <>
+              <p className={h["home-recipes-loader"]}>Loading recipes...</p>
+              <div class={h["home-recipes-hourglass"]}></div>
+            </>
           ) : allRecipes === "ERR" ? (
             <NotFound />
           ) : (

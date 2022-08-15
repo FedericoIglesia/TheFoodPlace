@@ -2,8 +2,9 @@
 
 .container {
   background-color: #fff;
-  background: url("../bg-home3.jpeg") repeat center center/cover;
+  background: url("../bg-home3-corrected.jpg") repeat center center/cover fixed;
   /* background-position: bottom; */
+
   overflow-y: hidden;
 }
 
@@ -66,6 +67,51 @@
 /* .home-filters__name-order option {
   background: transparent;
 } */
+
+.home-recipes-loader {
+  color: #666;
+  margin: 5rem 7rem;
+  white-space: nowrap;
+  width: 20rem;
+  margin-bottom: 30rem;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  font-family: "Lobster", cursive;
+  font-size: 4rem;
+  color: #666;
+}
+
+.home-recipes-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 5rem 0 0rem 10rem;
+}
+.home-recipes-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid var(--bg-terciary);
+  border-color: var(--bg-terciary) transparent var(--bg-terciary) transparent;
+  animation: home-recipes-hourglass 1.2s infinite;
+}
+@keyframes home-recipes-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
 
 .home-recipes-container {
   display: grid;

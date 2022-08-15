@@ -1,0 +1,47 @@
+.duplicate-container {
+  /* display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center; */
+  margin: 6rem auto 6rem auto;
+}
+
+.duplicate-title {
+  color: var(--bg-fourth);
+  font-size: 6rem;
+  font-family: "Lobster", cursive;
+  text-align: center;
+  /* margin: 0 1rem 0 4rem; */
+  /* animation: slide 2s 1; */
+}
+
+.duplicate-description {
+  text-align: center;
+  margin: auto;
+  width: 30rem;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  border-radius: 50px;
+  border: 1px solid #666;
+  font-family: "Lobster", cursive;
+  font-size: 1.5rem;
+  color: #666;
+  background-color: rgb(248, 238, 211);
+}
+.duplicate-img {
+  position: relative;
+  /* left: 44%; */
+  margin-top: 6rem;
+  width: 250px;
+  animation: slid 1.5s 1;
+}
+
+@keyframes slid {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}

@@ -8,24 +8,30 @@
   text-align: center;
 }
 
-.landing-title {
+.landing-title__1st {
   /* position: relative; */
-  margin: 2rem auto 0 auto;
+  margin: 4rem auto 0 auto;
   font-family: "Lobster Two", cursive;
   font-size: 5rem;
   font-weight: 200;
-  width: 40rem;
+  /* width: 0rem; */
   color: var(--bg-terciary);
   word-wrap: break-word;
   line-height: 1.2;
 }
 
-.landing-title span {
+.landing-title__2nd {
   font-family: "Shadows Into Light Two", cursive;
+  width: 30rem;
+  margin: 3rem auto 0 auto;
   font-size: 10rem;
   font-weight: 400;
-
+  color: var(--bg-terciary);
   /* line-height: 0.5; */
+}
+
+.landing-title__2nd span {
+  color: #666;
 }
 
 .landing-button {

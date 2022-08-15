@@ -9,7 +9,7 @@
   text-align: center;
   margin: 0 12rem 0 12rem;
   height: 5rem;
-  border-radius: 0 0 0 5px;
+  border-radius: 0 0 5px 5px;
 }
 a {
   text-decoration: none;
