@@ -1,4 +1,5 @@
 import React from "react";
+import p from "./DuplicateNote.module.css";
 
 function DuplicateNote() {
   return (

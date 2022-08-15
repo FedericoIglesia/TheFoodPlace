@@ -1,0 +1,98 @@
+/* using BEM methodology */
+@import "../index.css";
+
+.nav {
+  /* background-color: var(--bg-primary); */
+  background-color: #fff;
+  color: var(--bg-fourth);
+  display: flex;
+  text-align: center;
+  margin: 0 12rem 0 12rem;
+  height: 5rem;
+  border-radius: 0 0 0 5px;
+}
+a {
+  text-decoration: none;
+}
+
+.nav li {
+  text-decoration: none;
+  list-style: none;
+  width: 100%;
+}
+
+/* .nav-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-top: 1.5rem;
+  /* display: inline; 
+} */
+
+.nav-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container__title {
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 2rem;
+  margin-left: 1rem;
+  padding-left: 0.5rem;
+  word-wrap: break-word;
+  color: var(--bg-fourth);
+  transition: all 1s;
+}
+
+.nav-container__title span {
+  color: #666;
+}
+
+.nav-container__title:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.nav-container__ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 1rem;
+}
+.nav-container__ul a {
+  width: 100%;
+  color: #fff;
+  padding: 1.9rem 1rem;
+  transition: background-color 0.5s;
+}
+
+.nav-container__ul a:nth-child(1) {
+  background-color: var(--bg-secondary);
+}
+.nav-container__ul a:nth-child(2) {
+  background-color: var(--bg-terciary);
+  /* display: none; */
+}
+.nav-container__ul a:nth-child(3) {
+  background-color: var(--bg-fourth);
+  border-radius: 0 0 5px 0;
+}
+.nav-container__ul a:nth-child(1):hover {
+  color: var(--bg-secondary);
+  background-color: #fff;
+}
+.nav-container__ul a:nth-child(2):hover {
+  color: var(--bg-terciary);
+  background-color: #fff;
+}
+.nav-container__ul a:nth-child(3):hover {
+  color: var(--bg-fourth);
+  background-color: #fff;
+}
+
+.nav-container__ul li {
+  display: block;
+  margin: 0 0.5rem 0 0.5rem;
+  justify-content: center;
+}

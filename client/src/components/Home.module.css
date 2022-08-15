@@ -1,0 +1,90 @@
+@import "../index.css";
+
+.container {
+  background-color: #fff;
+  background: url("../bg-home3.jpeg") repeat center center/cover;
+  /* background-position: bottom; */
+  overflow-y: hidden;
+}
+
+.home-container {
+  /* background-color: var(--bg-primary); */
+  /* width: 100%; */
+  /* max-width: 100%; */
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Reaload button */
+.home-reload-button {
+  background-color: var(--bg-secondary);
+  color: #fff;
+  border: none;
+  width: 10rem;
+  height: 2rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 3px;
+  transition: background 1s;
+  border: 1px solid var(--bg-primary);
+}
+
+.home-reload-button:hover {
+  background-color: #fff;
+  border: 1px solid var(--bg-secondary);
+  color: var(--bg-secondary);
+  cursor: pointer;
+}
+
+/* Filters */
+.home-filters-container {
+  margin-bottom: 2rem;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.home-filters {
+  color: #fff;
+  border: 1px solid var(--bg-terciary);
+  margin: 0 1rem;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 3px;
+  background: var(--bg-secondary);
+  width: 10rem;
+  height: 2rem;
+  transition: background 1s;
+}
+
+.home-filters:hover {
+  border: 1px solid var(--bg-secondary);
+  color: var(--bg-secondary);
+  background: #fff;
+  cursor: pointer;
+}
+
+/* .home-filters__name-order option {
+  background: transparent;
+} */
+
+.home-recipes-container {
+  display: grid;
+  grid-template-columns: 20% 20% 20%;
+  grid-template-rows: 33% 33% 33%;
+  grid-gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.home-recipes-container a {
+  /* margin: 2rem auto; */
+  width: 20rem;
+  height: 350px;
+  padding-bottom: 1rem;
+  /* border: 1px solid black; */
+  background-color: #fff;
+  /* box-shadow: #000000 0px 0px 1px 0px; */
+  border-radius: 50px;
+
+  /* justify-self: center; */
+}

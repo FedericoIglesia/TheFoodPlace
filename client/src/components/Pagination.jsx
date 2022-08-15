@@ -1,4 +1,5 @@
 import React from "react";
+import * as p from "./Pagination.module.css";
 
 function Pagination({ recipesPerPage, allRecipes, pages }) {
   //destructuring the props
@@ -10,17 +11,17 @@ function Pagination({ recipesPerPage, allRecipes, pages }) {
   }
 
   return (
-    <nav>
-      <ul className="pagination-ul">
+    <div className={p["pagination-container"]}>
+      <ul className={p["pagination-ul"]}>
         {/* mapping the li with my recipes per page */}
         {pageNumbers &&
           pageNumbers.map((number) => (
-            <li className="pagination-li" key={number}>
-              <a onClick={() => pages(number)}>{number}</a>;
+            <li className={p["pagination-li"]} key={number}>
+              <a onClick={() => pages(number)}>{number}</a>
             </li>
           ))}
       </ul>
-    </nav>
+    </div>
   );
 }
 

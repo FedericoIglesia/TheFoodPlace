@@ -114,7 +114,7 @@ export default function RecipeCreation() {
     if (posted === "success" || posted === "duplicate")
       setTimeout(() => {
         setPosted("");
-      }, 2000);
+      }, 20000);
   }, [posted]);
 
   return (

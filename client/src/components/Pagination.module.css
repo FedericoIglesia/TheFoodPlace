@@ -1,0 +1,34 @@
+@import "../index.css";
+
+.pagination-container {
+  margin: 7rem 0;
+}
+
+.pagination-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+
+.pagination-li {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-color: var(--bg-terciary);
+  margin: 0.5rem;
+  border-radius: 3px;
+  transition: background 0.5s;
+  border: 1px solid var(--bg-terciary);
+}
+.pagination-li a {
+  font-family: "Raleway", cursive;
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+}
+
+.pagination-li:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: var(--bg-terciary);
+}

@@ -1,0 +1,26 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 10rem 0 0 15rem;
+}
+
+.not-found__title {
+  text-align: center;
+  white-space: nowrap;
+  /* display: block; */
+  margin: 1rem auto 2rem 3rem;
+  color: #fff;
+  background-color: #9b0808;
+  padding: 1rem;
+  border-radius: 50px;
+}
+
+.not-found__img {
+  width: 400px;
+
+  /* border-radius: 50px; */
+  /* padding: 2rem; */
+  height: 400px;
+}

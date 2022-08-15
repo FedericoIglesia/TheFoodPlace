@@ -1,0 +1,50 @@
+@import "../index.css";
+
+.landing-bg-img {
+  background: url("../Food1-bg.jpg") no-repeat center center/cover;
+  height: 100vh;
+  overflow-y: hidden;
+  width: 100%;
+  text-align: center;
+}
+
+.landing-title {
+  /* position: relative; */
+  margin: 2rem auto 0 auto;
+  font-family: "Lobster Two", cursive;
+  font-size: 5rem;
+  font-weight: 200;
+  width: 40rem;
+  color: var(--bg-terciary);
+  word-wrap: break-word;
+  line-height: 1.2;
+}
+
+.landing-title span {
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 10rem;
+  font-weight: 400;
+
+  /* line-height: 0.5; */
+}
+
+.landing-button {
+  position: relative;
+  /* top: 30%; */
+  margin-top: 5rem;
+  width: 20rem;
+  height: 2.5rem;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid var(--bg-secondary);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  color: var(--bg-secondary);
+  transition: background 1.5s;
+}
+
+.landing-button:hover {
+  background-color: var(--bg-secondary);
+  color: #fff;
+  cursor: pointer;
+}

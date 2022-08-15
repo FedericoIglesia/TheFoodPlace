@@ -9,8 +9,9 @@ import {
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import Pagination from "./Pagination";
-import SearchBar from "./SearchBar";
 import NotFound from "./NotFound";
+import Nav from "./Nav";
+import * as h from "./Home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ export default function Home() {
   //setting up local states for the pagination
 
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line
   const [recipesPerPage, setRecipesPerPage] = useState(9);
+  // eslint-disable-next-line
   const [order, setOrder] = useState("");
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -61,79 +64,95 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Link to="/recipe">Create New Recipe</Link>
-      <h1>The Food Place</h1>
-      <SearchBar />
-      <button onClick={(e) => handleClick(e)}>Reload all recipes</button>{" "}
-      <div>
-        <select onChange={(e) => handleOrderByName(e)} defaultValue={"default"}>
-          <option disabled value="default">
-            Order By Name
-          </option>
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-        </select>
-        <select
-          onChange={(e) => handleOrderByScore(e)}
-          defaultValue={"default"}
+    <div className={h.container}>
+      <Nav />
+      <div className={h["home-container"]}>
+        <div className={h["home-filters-container"]}>
+          <select
+            className={h["home-filters"]}
+            onChange={(e) => handleOrderByName(e)}
+            defaultValue={"default"}
+          >
+            <option disabled value="default">
+              By Name
+            </option>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+          </select>
+          <select
+            className={h["home-filters"]}
+            onChange={(e) => handleOrderByScore(e)}
+            defaultValue={"default"}
+          >
+            <option value="default" disabled>
+              By Health Score
+            </option>
+            <option value="up">Greater</option>
+            <option value="down">Lower</option>
+          </select>
+          {/* //can i map these below from my records in the db?} */}
+          <select
+            className={h["home-filters"]}
+            onChange={(e) => handleDietFilter(e)}
+          >
+            <option value="allTypes">All Diet Types</option>
+            <option value="gluten free">Gluten Free</option>
+            <option value="ketogenic">Ketogenic</option>
+            <option value="lacto ovo vegetarian">Lacto Ovo Vegetarian</option>
+            <option value="dairy free">Dairy Free</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="pescatarian">Pescatarian</option>
+            <option value="paleo">Paleo</option>
+            <option value="primal">Primal</option>
+            <option value="whole 30">Whole30</option>
+            <option value="paleolithic">Paleolithic</option>
+            <option value="fodmap friendly">Fodmap Friendly</option>
+          </select>
+        </div>
+        <button
+          onClick={(e) => handleClick(e)}
+          className={h["home-reload-button"]}
         >
-          <option value="default" disabled>
-            Order By Health Score
-          </option>
-          <option value="up">Greater Health Score</option>
-          <option value="down">Lower Health Score</option>
-        </select>
-        {/* //can i map these below from my records in the db?} */}
-        <select onChange={(e) => handleDietFilter(e)}>
-          <option value="allTypes">All Diet Types</option>
-          <option value="gluten free">Gluten Free</option>
-          <option value="ketogenic">Ketogenic</option>
-          <option value="lacto ovo vegetarian">Lacto Ovo Vegetarian</option>
-          <option value="dairy free">Dairy Free</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="pescatarian">Pescatarian</option>
-          <option value="paleo">Paleo</option>
-          <option value="primal">Primal</option>
-          <option value="whole 30">Whole30</option>
-          <option value="paleolithic">Paleolithic</option>
-          <option value="fodmap friendly">Fodmap Friendly</option>
-        </select>
-        {!currentRecipes.length ? (
-          <p>Loading recipes...</p>
-        ) : allRecipes === "ERR" ? (
-          <NotFound />
-        ) : (
-          currentRecipes?.map((r) => {
-            return (
-              <>
-                <Link to={"/home/" + r.id}>
-                  <Recipe
-                    image={
-                      r.image
-                        ? r.image
-                        : "https://thesmartwander.com/wp-content/uploads/2020/09/how-to-draw-food-3-1024x1024.jpg"
-                    }
-                    name={r.name}
-                    diets={r.diets}
-                    key={r.id}
-                  />
-                  ;
-                </Link>
-              </>
-            );
-          })
-        )}
+          Reload all recipes
+        </button>{" "}
+        <div className={h["home-recipes-container"]}>
+          {!currentRecipes.length ? (
+            <p className={h["home-recipes-loader"]}>Loading recipes...</p>
+          ) : allRecipes === "ERR" ? (
+            <NotFound />
+          ) : (
+            currentRecipes?.map((r) => {
+              return (
+                <>
+                  <Link to={"/home/" + r.id}>
+                    <Recipe
+                      image={
+                        r.image
+                          ? r.image
+                          : "https://thesmartwander.com/wp-content/uploads/2020/09/how-to-draw-food-3-1024x1024.jpg"
+                      }
+                      name={r.name}
+                      diets={r.diets}
+                      key={r.id}
+                    />
+                  </Link>
+                </>
+              );
+            })
+          )}
+        </div>
+        <div className={h["home-pagination-container"]}>
+          {allRecipes !== "ERR" && (
+            <Pagination
+              recipesPerPage={recipesPerPage}
+              allRecipes={allRecipes.length}
+              pages={pages}
+              key={pages}
+            />
+          )}
+        </div>
       </div>
-      {allRecipes !== "ERR" && (
-        <Pagination
-          recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
-          pages={pages}
-          key={pages}
-        />
-      )}
     </div>
   );
 }

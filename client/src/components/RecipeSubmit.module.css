@@ -1,0 +1,15 @@
+.submit-img {
+  position: relative;
+  left: 0;
+  animation: slide 3s 1;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
