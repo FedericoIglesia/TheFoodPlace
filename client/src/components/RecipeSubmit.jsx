@@ -6,7 +6,7 @@ function RecipeSubmit() {
   return (
     <div className={s["submit-container"]}>
       <h1 className={s["submit-title"]}>Recipe Submitted!</h1>
-      <img src={check} className={s["submit-img"]} />
+      <img src={check} className={s["submit-img"]} alt="submit" />
     </div>
   );
 }

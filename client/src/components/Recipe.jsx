@@ -2,9 +2,9 @@ import React from "react";
 import r from "./Recipe.module.css";
 
 export default class Recipe extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     //the diet types from the API come in as an array of strings, while from the DB they come in as an array of objects. Doing a conditional rendering below depending on the source of information.

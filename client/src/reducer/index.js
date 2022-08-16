@@ -74,7 +74,7 @@ function rootReducer(state = initialState, action) {
               if (a.healthScore > b.healthScore) return 1;
               else return -1;
             });
-      console.log(state.recipes[0].healthScore);
+      // console.log(state.recipes[0].healthScore);
       return {
         ...state,
         recipes: sortedScore,

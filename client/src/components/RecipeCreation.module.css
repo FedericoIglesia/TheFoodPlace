@@ -1,8 +1,7 @@
 @import "../index.css";
 
 body {
-  background: url("../bg-home3-corrected.jpg") no-repeat center center/cover
-    fixed;
+  background: url("../bg-home3-bis.jpg") no-repeat center center/cover fixed;
 }
 
 /* body::before {
@@ -31,13 +30,20 @@ a {
 
 .form-btn {
   margin: 1rem auto 1rem auto;
+  /* padding: 2rem; */
+  height: 4rem;
+  width: 4rem;
+  position: fixed;
+  left: 3rem;
+  top: 2rem;
   display: block;
+  white-space: wrap;
   background-color: var(--bg-secondary);
   color: #fff;
-  width: 10rem;
-  height: 2rem;
+  /* width: 3rem;
+  height: 3rem; */
   font-size: 1rem;
-  border-radius: 3px;
+  border-radius: 50%;
   transition: background 1s;
   border: 1px solid var(--bg-primary);
 }
@@ -56,6 +62,7 @@ a {
 }
 
 .form-input-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid #fff;
@@ -63,6 +70,7 @@ a {
   width: 40rem;
   padding: 2rem;
   margin: auto;
+  /* padding-bottom: 4rem; */
   background-color: #fff;
   font-family: "Pacifico", cursive;
   border: 1px solid var(--bg-fourth);
@@ -119,22 +127,56 @@ input[type="checkbox"]:focus {
   color: var(--bg-secondary);
 }
 
-.form-input-errors {
+.form-input-errors-name {
   margin-bottom: 1rem;
-  font-family: "Sofia", cursive;
+  font-family: "Raleway", cursive;
   line-height: 0;
   text-align: start;
-  color: rgb(140, 3, 3);
+  color: #bb0c0c;
+  position: absolute;
+  top: 10.5%;
+  left: 5%;
+}
+.form-input-errors-summary {
+  margin-bottom: 1rem;
+  font-family: "Raleway", cursive;
+  line-height: 0;
+  text-align: start;
+  color: #bb0c0c;
+  position: absolute;
+  top: 20%;
+  left: 5%;
+}
+.form-input-errors-score {
+  margin-bottom: 1rem;
+  font-family: "Raleway", cursive;
+  line-height: 0;
+  text-align: start;
+  color: #bb0c0c;
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+.form-input-errors-steps {
+  margin-bottom: 1rem;
+  font-family: "Raleway", cursive;
+  line-height: 0;
+  text-align: start;
+  color: #bb0c0c;
+  position: absolute;
+  top: 46.5%;
+  left: 5%;
 }
 
 .form-input-errors-diets {
   margin-bottom: 1rem;
-  font-family: "Sofia", cursive;
+  font-family: "Raleway", cursive;
   line-height: 0;
-  position: relative;
-  left: 5rem;
+  position: absolute;
+  top: 97%;
+  left: 5%;
   text-align: start;
-  color: rgb(140, 3, 3);
+  color: #bb0c0c;
 }
 
 .form-checkbox-container {

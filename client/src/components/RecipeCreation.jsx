@@ -1,13 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  postRecipe,
-  getDiets,
-  searchRecipes,
-  getRecipes,
-} from "../actions/index";
+import { postRecipe, getDiets, getRecipes } from "../actions/index";
 import RecipeSubmit from "./RecipeSubmit";
 import DuplicateNote from "./DuplicateNote";
 import * as r from "./RecipeCreation.module.css";
@@ -107,11 +102,11 @@ export default function RecipeCreation() {
   //Getting the diet types list from the global state when the component is first rendered.
   useEffect(() => {
     dispatch(getDiets());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getRecipes());
-  }, [posted]);
+  }, [posted, dispatch]);
 
   //Displaying a notification to the user to advise that the creation was successful. Watching the "posted" local state
   useEffect(() => {
@@ -130,7 +125,7 @@ export default function RecipeCreation() {
       ) : (
         <div className={r["form-container"]}>
           <Link to="/home">
-            <button className={r["form-btn"]}>Back To Home</button>
+            <button className={r["form-btn"]}>Back</button>
           </Link>
           <h1 className={r["form-title"]}>Submit Your Own Recipe!</h1>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -148,7 +143,9 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.name && (
-                <p className={r["form-input-errors"]}>{invalidValues.name}</p>
+                <p className={r["form-input-errors-name"]}>
+                  {invalidValues.name}
+                </p>
               )}
               <label>
                 Summary:
@@ -162,7 +159,7 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.summary && (
-                <p className={r["form-input-errors"]}>
+                <p className={r["form-input-errors-summary"]}>
                   {invalidValues.summary}
                 </p>
               )}
@@ -177,7 +174,7 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.healthScore && (
-                <p className={r["form-input-errors"]}>
+                <p className={r["form-input-errors-score"]}>
                   {invalidValues.healthScore}
                 </p>
               )}
@@ -191,13 +188,15 @@ export default function RecipeCreation() {
                 />
               </label>
               {invalidValues.steps && (
-                <p className={r["form-input-errors"]}>{invalidValues.steps}</p>
+                <p className={r["form-input-errors-steps"]}>
+                  {invalidValues.steps}
+                </p>
               )}
               <label>Diet Type:</label>
               <div className={r["form-checkbox-container"]}>
                 {/* rendering the checkboxes with the diets gotten from the global state */}
-                {dietState.map((d) => (
-                  <label>
+                {dietState.map((d, i) => (
+                  <label key={i}>
                     <input
                       type="checkbox"
                       name={d}

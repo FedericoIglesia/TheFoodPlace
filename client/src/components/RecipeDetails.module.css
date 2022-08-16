@@ -20,17 +20,33 @@ body {
   color: var(--bg-terciary);
   font-size: 4.5rem;
 }
-
+.recipe-details-dish-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .recipe-details-dish {
   font-size: 3rem;
   color: #666;
+}
+
+.recipe-details-diets-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .recipe-details-diets {
   color: var(--bg-terciary);
   font-size: 2.5rem;
   font-family: "Pacifico";
+  list-style-type: circle;
+  list-style-position: inside;
 }
+
+/* .recipe-details-diets::after {
+  content: ",";
+} */
 
 .recipe-details-summary {
   font-size: 1.8rem;
@@ -59,7 +75,8 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-family: "Raleway", cursive;
 }
 
 .recipe-details-ingredients ul {
@@ -83,8 +100,9 @@ body {
 }
 
 .recipe-details-steps {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
+  font-family: "Raleway", cursive;
 }
 
 .recipe-details-btn {
@@ -117,7 +135,7 @@ body {
 /* Loader */
 .recipe-details-loader-container {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .recipe-details-loader {
   color: #666;

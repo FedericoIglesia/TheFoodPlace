@@ -5,14 +5,14 @@ import { useEffect } from "react";
 import { getDetail } from "../actions/index";
 import * as r from "./RecipeDetails.module.css";
 
-function RecipeDetails(props) {
+function RecipeDetails() {
   const dispatch = useDispatch();
   const myRecipe = useSelector((state) => state.detail) || [];
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getDetail(id));
-  }, []);
+  }, [dispatch, id]);
 
   //In order to display an unordered list of ingredients without duplicates, i need to store my nested array in a variable and remove the duplicates before the render. Using the Set constructor to get a unique set of values. Spreading it into an array to do a map of list items in the render.
   let arr;
@@ -25,7 +25,7 @@ function RecipeDetails(props) {
   //Ingredients is an array of objects, inside an object inside an array, inside another array...
   let unique = [...new Set(arr)];
   let unique2 = [...new Set(unique.flat())];
-  console.log(unique2);
+  //   console.log(unique2);
 
   //   const ulStyle = {
   //     textAlign: "left",
@@ -47,16 +47,30 @@ function RecipeDetails(props) {
             className={r["recipe-details-img"]}
           />
           <h1 className={r["recipe-details-title"]}>{myRecipe.name}</h1>
-          <h3 className={r["recipe-details-dish"]}>
-            {Object.keys(myRecipe).find((e) => e === "dishTypes")
-              ? myRecipe.dishTypes.map((dish) => "- " + dish + " -")
-              : "No dish types description available for this recipe"}
-          </h3>
-          <h3 className={r["recipe-details-diets"]}>
+          <div className={r["recipe-details-dish-container"]}>
+            {Object.keys(myRecipe).find((e) => e === "dishTypes") ? (
+              myRecipe.dishTypes.map((dish, i) => (
+                <h3 className={r["recipe-details-dish"]} key={i}>
+                  {"- " + dish + " -"}
+                </h3>
+              ))
+            ) : (
+              <h3>"No dish types description available for this recipe"</h3>
+            )}{" "}
+          </div>
+          <div className={r["recipe-details-diets-container"]}>
             {typeof myRecipe.diets[0] === "string"
-              ? myRecipe.diets.map((d) => d + " ")
-              : myRecipe.diets.map((d) => d.name)}
-          </h3>
+              ? myRecipe.diets.map((d, i) => (
+                  <ul key={i}>
+                    <li className={r["recipe-details-diets"]}>{d}</li>
+                  </ul>
+                ))
+              : myRecipe.diets.map((d, i) => (
+                  <ul key={i}>
+                    <li className={r["recipe-details-diets"]}>{d.name}</li>
+                  </ul>
+                ))}
+          </div>
           <p className={r["recipe-details-summary"]}>
             {myRecipe.summary.replace(/<[^>]+>/g, "")}
           </p>
@@ -69,38 +83,37 @@ function RecipeDetails(props) {
             </h4>
           )}
           <div className={r["recipe-details-ingredients"]}>
-            {unique2.map((u) => {
+            {unique2.map((u, i) => {
               return (
-                <div>
+                <div key={i}>
                   <ul>
-                    <li>{u + " "}</li>
+                    <li>{u}</li>
                   </ul>
                 </div>
               );
             })}
           </div>
           <h4 className={r["recipe-details-steps-title"]}>Steps:</h4>
-          <p className={r["recipe-details-steps"]}>
+          <div className={r["recipe-details-steps"]}>
             {typeof myRecipe.steps === "string"
               ? myRecipe.steps
-              : myRecipe.steps.map((s) => (
-                  <>
-                    <div>
+              : myRecipe.steps.map((s, i) => (
+                  <div key={i}>
+                    <p>
                       {s.number}: {s.step}
-                    </div>
-                    {/* <br></br> */}
-                  </>
+                    </p>
+                  </div>
                 ))}
-          </p>
+          </div>
         </div>
       ) : (
         <div className={r["recipe-details-loader-container"]}>
           <p className={r["recipe-details-loader"]}>Loading recipes...</p>
-          <div class={r["recipe-details-hourglass"]}></div>
+          <div className={r["recipe-details-hourglass"]}></div>
         </div>
       )}
       <Link to="/home">
-        <button className={r["recipe-details-btn"]}>Go Back</button>
+        <button className={r["recipe-details-btn"]}>Back</button>
       </Link>
     </div>
   );

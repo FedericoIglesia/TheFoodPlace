@@ -9,7 +9,7 @@ function DuplicateNote() {
       <p className={p["duplicate-description"]}>
         Please submit a recipe with a different name
       </p>
-      <img className={p["duplicate-img"]} src={check} />
+      <img className={p["duplicate-img"]} src={check} alt="Duplicate" />
     </div>
   );
 }

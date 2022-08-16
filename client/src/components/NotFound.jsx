@@ -6,7 +6,7 @@ function NotFound() {
   return (
     <div className={nf["not-found-container"]}>
       <h1 className={nf["not-found__title"]}>NO RECIPES FOUND</h1>
-      <img className={nf["not-found__img"]} src={logo} />
+      <img className={nf["not-found__img"]} src={logo} alt="not found" />
     </div>
   );
 }

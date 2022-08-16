@@ -1,0 +1,35 @@
+.about-home-btn {
+  margin: 1rem auto 1rem auto;
+  /* padding: 2rem; */
+  height: 4rem;
+  width: 4rem;
+  position: fixed;
+  left: 3rem;
+  top: 2rem;
+  display: block;
+  white-space: wrap;
+  background-color: var(--bg-secondary);
+  color: #fff;
+  /* width: 3rem;
+  height: 3rem; */
+  font-size: 1rem;
+  border-radius: 50%;
+  transition: background 1s;
+  border: 1px solid var(--bg-primary);
+}
+
+.about-home-btn:hover {
+  background-color: #fff;
+  border: 1px solid var(--bg-secondary);
+  color: var(--bg-secondary);
+  cursor: pointer;
+}
+
+.about-container div {
+  text-align: center;
+  margin-top: 8rem;
+}
+.about-img {
+  width: 40rem;
+  height: 40rem;
+}

@@ -90,7 +90,6 @@ export default function Home() {
             <option value="up">Greater</option>
             <option value="down">Lower</option>
           </select>
-          {/* //can i map these below from my records in the db?} */}
           <select
             className={h["home-filters"]}
             onChange={(e) => handleDietFilter(e)}
@@ -115,32 +114,30 @@ export default function Home() {
           className={h["home-reload-button"]}
         >
           Reload all recipes
-        </button>{" "}
+        </button>
         <div className={h["home-recipes-container"]}>
           {!currentRecipes.length ? (
             <>
               <p className={h["home-recipes-loader"]}>Loading recipes...</p>
-              <div class={h["home-recipes-hourglass"]}></div>
+              <div className={h["home-recipes-hourglass"]}></div>
             </>
           ) : allRecipes === "ERR" ? (
             <NotFound />
           ) : (
-            currentRecipes?.map((r) => {
+            currentRecipes?.map((r, i) => {
               return (
-                <>
-                  <Link to={"/home/" + r.id}>
-                    <Recipe
-                      image={
-                        r.image
-                          ? r.image
-                          : "https://thesmartwander.com/wp-content/uploads/2020/09/how-to-draw-food-3-1024x1024.jpg"
-                      }
-                      name={r.name}
-                      diets={r.diets}
-                      key={r.id}
-                    />
-                  </Link>
-                </>
+                <Link to={"/home/" + r.id} key={i}>
+                  <Recipe
+                    image={
+                      r.image
+                        ? r.image
+                        : "https://thesmartwander.com/wp-content/uploads/2020/09/how-to-draw-food-3-1024x1024.jpg"
+                    }
+                    name={r.name}
+                    diets={r.diets}
+                    key={r.id}
+                  />
+                </Link>
               );
             })
           )}
