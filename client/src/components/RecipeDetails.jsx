@@ -100,7 +100,7 @@ function RecipeDetails(props) {
         </div>
       )}
       <Link to="/home">
-        <button>Go Back</button>
+        <button className={r["recipe-details-btn"]}>Go Back</button>
       </Link>
     </div>
   );

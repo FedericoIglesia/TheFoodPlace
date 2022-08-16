@@ -4,18 +4,7 @@
   --bg-terciary: #ff7b74;
   --bg-fourth: #f4716a;
 }
-.btn-primary {
-  background-color: var(--bg-secondary);
-  color: #fff;
-  border: none;
-  width: 10rem;
-  height: 2rem;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 3px;
-  transition: background 1s;
-  border: 1px solid var(--bg-primary);
-}
+
 body {
   margin: 0;
   padding: 0;

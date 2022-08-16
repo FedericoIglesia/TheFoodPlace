@@ -1,3 +1,6 @@
+body {
+  background: url("../bg-home3-bis.jpg") no-repeat center center/cover fixed;
+}
 .recipe-details-container {
   text-align: center;
   margin: 5rem auto;
@@ -19,7 +22,7 @@
 }
 
 .recipe-details-dish {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #666;
 }
 
@@ -38,7 +41,7 @@
 }
 
 .recipe-details-score {
-  font-size: 2rem;
+  font-size: 3rem;
   /* text-align: s; */
 }
 
@@ -48,15 +51,43 @@
 }
 
 .recipe-details-steps-title {
+  font-size: 3rem;
 }
 
 .recipe-details-steps {
+  font-size: 2rem;
 }
 
 .recipe-details-ingredients-title {
+  font-size: 3rem;
 }
 
 .recipe-details-ingredients {
+  font-size: 2rem;
+}
+
+.recipe-details-ingredients ul {
+  /* list-style: none; */
+}
+
+.recipe-details-btn {
+  margin: 1rem auto 1rem auto;
+  display: block;
+  background-color: var(--bg-secondary);
+  color: #fff;
+  width: 12rem;
+  height: 3rem;
+  font-size: 1rem;
+  border-radius: 3px;
+  transition: background 1s;
+  border: 1px solid var(--bg-primary);
+}
+
+.recipe-details-btn:hover {
+  background-color: #fff;
+  border: 1px solid var(--bg-secondary);
+  color: var(--bg-secondary);
+  cursor: pointer;
 }
 
 /* Loader */

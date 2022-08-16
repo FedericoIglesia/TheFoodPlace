@@ -127,6 +127,16 @@ input[type="checkbox"]:focus {
   color: rgb(140, 3, 3);
 }
 
+.form-input-errors-diets {
+  margin-bottom: 1rem;
+  font-family: "Sofia", cursive;
+  line-height: 0;
+  position: relative;
+  left: 5rem;
+  text-align: start;
+  color: rgb(140, 3, 3);
+}
+
 .form-checkbox-container {
   display: grid;
   grid-template-columns: 20% 20% 20% 20%;
@@ -160,4 +170,17 @@ input[type="checkbox"]:focus {
   border: 1px solid var(--bg-secondary);
   color: var(--bg-secondary);
   cursor: pointer;
+}
+
+.form-btn-submit-disabled {
+  margin: 1rem auto 1rem auto;
+  display: block;
+  background-color: #cccaca;
+  color: #fff;
+  width: 44.1rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  transition: background 1s;
+  border: 1px solid var(--bg-primary);
 }

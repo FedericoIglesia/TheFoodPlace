@@ -208,17 +208,23 @@ export default function RecipeCreation() {
                     {d.charAt(0).toUpperCase() + d.slice(1)}
                   </label>
                 ))}
-                {!input.diet.length && (
-                  <p className={r["form-input-errors"]}>{invalidValues.diet}</p>
-                )}
               </div>
+              {!input.diet.length && (
+                <p className={r["form-input-errors-diets"]}>
+                  {invalidValues.diet}
+                </p>
+              )}
             </div>
             {Object.keys(invalidValues).length && input.diet.length ? (
               <button className={r["form-btn-submit"]} type="submit">
                 Submit Recipe
               </button>
             ) : (
-              <button className={r["form-btn-submit"]} type="submit" disabled>
+              <button
+                className={r["form-btn-submit-disabled"]}
+                type="submit"
+                disabled
+              >
                 Submit Recipe
               </button>
             )}
