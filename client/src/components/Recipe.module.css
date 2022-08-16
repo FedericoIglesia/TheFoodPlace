@@ -7,12 +7,6 @@
   padding-bottom: 14px;
 }
 
-/* .recipe-img-container {
-  background-color: #fff;
-  display: inline-block;
-  height: 200px;
-} */
-
 .recipe-container:hover {
   opacity: 0.7;
 }
@@ -23,11 +17,6 @@
   border-radius: 50px 50px 0 0;
   transition: all 0.7s;
 }
-
-/* .recipe-img:hover {
-
-  transform: scale(1.2, 1.2);
-} */
 
 .recipe-name {
   font-size: 1.3rem;
