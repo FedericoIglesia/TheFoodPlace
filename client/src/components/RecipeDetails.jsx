@@ -63,6 +63,22 @@ function RecipeDetails(props) {
           <p className={r["recipe-details-score"]}>
             Health Score:<span>{myRecipe.healthScore}</span>
           </p>
+          {typeof myRecipe.steps !== "string" && (
+            <h4 className={r["recipe-details-ingredients-title"]}>
+              Ingredients:
+            </h4>
+          )}
+          <div className={r["recipe-details-ingredients"]}>
+            {unique2.map((u) => {
+              return (
+                <div>
+                  <ul>
+                    <li>{u + " "}</li>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
           <h4 className={r["recipe-details-steps-title"]}>Steps:</h4>
           <p className={r["recipe-details-steps"]}>
             {typeof myRecipe.steps === "string"
@@ -76,22 +92,6 @@ function RecipeDetails(props) {
                   </>
                 ))}
           </p>
-          {typeof myRecipe.steps !== "string" && (
-            <h4 className={r["recipe-details-ingredients-title"]}>
-              Ingredients:
-            </h4>
-          )}
-          <div className={r["recipe-details-ingredients"]}>
-            {unique2.map((u) => {
-              return (
-                <div>
-                  <ul>
-                    <li>{u}</li>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
         </div>
       ) : (
         <div className={r["recipe-details-loader-container"]}>

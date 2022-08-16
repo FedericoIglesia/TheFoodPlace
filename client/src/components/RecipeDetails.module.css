@@ -4,7 +4,7 @@ body {
 .recipe-details-container {
   text-align: center;
   margin: 5rem auto;
-  width: 40rem;
+  width: 80rem;
   font-family: "Sacramento", cursive;
   font-family: 1.5rem;
 }
@@ -34,10 +34,10 @@ body {
 
 .recipe-details-summary {
   font-size: 1.8rem;
-  border: 1px solid salmon;
+  /* border: 1px solid salmon; */
   border-radius: 5px;
 
-  background-color: #f6d0ce;
+  /* background-color: #f6d0ce; */
 }
 
 .recipe-details-score {
@@ -50,35 +50,59 @@ body {
   color: var(--bg-terciary);
 }
 
+.recipe-details-ingredients-title {
+  font-size: 3rem;
+}
+
+.recipe-details-ingredients {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.recipe-details-ingredients ul {
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+/* .recipe-details-ingredients li::before {
+  content: "";
+  background-image: url("../squiggly.png");
+  background-size: 40px 40px;
+  margin-right: 2px;
+  display: inline-block;
+  z-index: 9;
+  width: 15px;
+  height: 15px;
+} */
+
 .recipe-details-steps-title {
   font-size: 3rem;
 }
 
 .recipe-details-steps {
   font-size: 2rem;
-}
-
-.recipe-details-ingredients-title {
-  font-size: 3rem;
-}
-
-.recipe-details-ingredients {
-  font-size: 2rem;
-}
-
-.recipe-details-ingredients ul {
-  /* list-style: none; */
+  text-align: center;
 }
 
 .recipe-details-btn {
   margin: 1rem auto 1rem auto;
+  /* padding: 2rem; */
+  height: 4rem;
+  width: 4rem;
+  position: fixed;
+  left: 3rem;
+  top: 2rem;
   display: block;
+  white-space: wrap;
   background-color: var(--bg-secondary);
   color: #fff;
-  width: 12rem;
-  height: 3rem;
+  /* width: 3rem;
+  height: 3rem; */
   font-size: 1rem;
-  border-radius: 3px;
+  border-radius: 50%;
   transition: background 1s;
   border: 1px solid var(--bg-primary);
 }

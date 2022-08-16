@@ -67,14 +67,14 @@ function rootReducer(state = initialState, action) {
       const sortedScore =
         action.payload === "up"
           ? state.recipes.sort((a, b) => {
-              if (a.score > b.score) return 1;
+              if (a.healthScore < b.healthScore) return 1;
               else return -1;
             })
           : state.recipes.sort((a, b) => {
-              if (a.score < b.score) return 1;
+              if (a.healthScore > b.healthScore) return 1;
               else return -1;
             });
-
+      console.log(state.recipes[0].healthScore);
       return {
         ...state,
         recipes: sortedScore,
