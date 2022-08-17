@@ -157,6 +157,7 @@ router.post("/", async (req, res) => {
   //destructuring the req via body
   let { name, summary, healthScore, steps, createdInDb, diet } = req.body;
 
+  name = name.toLowerCase();
   if (!name) {
     console.log(`
     
@@ -191,6 +192,37 @@ router.post("/", async (req, res) => {
     recipeCreated.addDiet(dietDb);
     res.send("Recipe successfully created");
   } else res.status(409).send("This recipe already exists!");
+});
+
+router.delete("/", async (req, res) => {
+  let { name } = req.body;
+
+  try {
+    let deleted = await Recipe.destroy({
+      where: {
+        name,
+      },
+    });
+    if (deleted) {
+      res.send("Recipe deleted");
+    } else res.status(409).send("There's no recipe with that name");
+  } catch (err) {
+    console.log(err);
+    res.status(404).send(err);
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  Recipe.destroy({
+    where: { id },
+  })
+    .then(() => {
+      res.send("Recipe deleted!");
+    })
+    .catch((err) => {
+      res.status(404).send("There's no recipe with that id");
+    });
 });
 
 module.exports = router;

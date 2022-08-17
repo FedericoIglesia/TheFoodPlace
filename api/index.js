@@ -26,24 +26,24 @@ conn.sync({ force: true }).then(() => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
 
     // copying all diets from https://spoonacular.com/food-api/docs#Diets to load into DB.
-    const diets = [
-      "gluten free",
-      "ketogenic",
-      "vegetarian",
-      "lacto ovo vegetarian",
-      "dairy free",
-      "vegan",
-      "pescatarian",
-      "paleo",
-      "primal",
-      "whole30",
-      "paleolithic",
-      "fodmap friendly",
-    ];
+    // const diets = [
+    //   "gluten free",
+    //   "ketogenic",
+    //   "vegetarian",
+    //   "lacto ovo vegetarian",
+    //   "dairy free",
+    //   "vegan",
+    //   "pescatarian",
+    //   "paleo",
+    //   "primal",
+    //   "whole30",
+    //   "paleolithic",
+    //   "fodmap friendly",
+    // ];
 
-    diets.forEach(
-      async (diet) => await Diet.findOrCreate({ where: { name: diet } })
-    );
+    // diets.forEach(
+    //   async (diet) => await Diet.findOrCreate({ where: { name: diet } })
+    // );
 
     // diets.forEach((diet) => Diet.findOrCreate({ where: { name: diet } }));
 
