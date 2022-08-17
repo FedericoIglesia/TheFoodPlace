@@ -9,6 +9,7 @@ export const GET_DIETS = "GET_DIETS";
 export const POST_RECIPE = "POST_RECIPE";
 export const POST_RECIPE_DUPLICATE = "POST_RECIPE_DUPLICATE";
 export const GET_DETAIL = "GET_DETAIL";
+export const CLEAN_DETAILS = "CLEAN_DETAILS";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -66,14 +67,26 @@ export function searchRecipes(name) {
 }
 
 export function getDiets() {
-  return async function (dispatch) {
-    let dietInfo = await axios("http://localhost:3001/diets");
-    return dispatch({
-      type: GET_DIETS,
-      payload: dietInfo.data,
-    });
+  return function (dispatch) {
+    fetch("http://localhost:3001/diets").then((res) =>
+      res.json().then((dietInfo) => {
+        return dispatch({
+          type: GET_DIETS,
+          payload: dietInfo,
+        });
+      })
+    );
   };
 }
+// export function getDiets() {
+//   return async function (dispatch) {
+//     let dietInfo = await axios("http://localhost:3001/diets");
+//     return dispatch({
+//       type: GET_DIETS,
+//       payload: dietInfo.data,
+//     });
+//   };
+// }
 
 export function postRecipe(payload) {
   return async function (dispatch) {
@@ -91,6 +104,14 @@ export function getDetail(id) {
     return dispatch({
       type: GET_DETAIL,
       payload: json.data,
+    });
+  };
+}
+
+export function cleanStateDetail() {
+  return async function (dispatch) {
+    return dispatch({
+      type: CLEAN_DETAILS,
     });
   };
 }

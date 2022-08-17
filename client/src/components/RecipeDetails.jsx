@@ -2,13 +2,17 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDetail } from "../actions/index";
+import { getDetail, cleanStateDetail } from "../actions/index";
 import * as r from "./RecipeDetails.module.css";
 
 function RecipeDetails() {
   const dispatch = useDispatch();
   const myRecipe = useSelector((state) => state.detail) || [];
   const { id } = useParams();
+
+  const handleClick = () => {
+    dispatch(cleanStateDetail());
+  };
 
   useEffect(() => {
     dispatch(getDetail(id));
@@ -113,7 +117,9 @@ function RecipeDetails() {
         </div>
       )}
       <Link to="/home">
-        <button className={r["recipe-details-btn"]}>Back</button>
+        <button className={r["recipe-details-btn"]} onClick={handleClick}>
+          Back
+        </button>
       </Link>
     </div>
   );

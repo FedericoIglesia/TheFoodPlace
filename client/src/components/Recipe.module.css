@@ -33,3 +33,13 @@
   width: 80%;
   margin: 1rem auto;
 }
+
+@media screen and (max-width: 1500px) {
+  .recipe-name {
+    font-size: 1rem;
+  }
+  .recipe-diets {
+    font-size: 0.6rem;
+    /* margin-top: 3.5rem; */
+  }
+}

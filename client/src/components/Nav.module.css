@@ -96,3 +96,19 @@ a {
   margin: 0 0.5rem 0 0.5rem;
   justify-content: center;
 }
+
+@media screen and (max-width: 1500px) {
+  .nav {
+    height: 8rem;
+    margin: 0 8rem 0 8rem;
+  }
+  .nav-container__ul li {
+    padding: 1.4rem 0;
+  }
+  .nav-container__ul a {
+    font-size: 1.2rem;
+  }
+  .nav-container__title {
+    margin-right: 1rem;
+  }
+}

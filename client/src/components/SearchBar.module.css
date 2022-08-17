@@ -40,5 +40,19 @@
   border: 1px solid var(--bg-secondary);
 }
 
-@media screen {
+@media screen and (max-width: 1500px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+  }
+  .search-bar {
+    width: 25rem;
+    margin-bottom: 1rem;
+  }
+  .search-bar__button {
+    width: 8rem;
+  }
 }

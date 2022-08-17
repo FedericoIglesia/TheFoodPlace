@@ -8,6 +8,7 @@ import {
   GET_DIETS,
   POST_RECIPE,
   GET_DETAIL,
+  CLEAN_DETAILS,
 } from "../actions";
 
 const initialState = {
@@ -50,11 +51,11 @@ function rootReducer(state = initialState, action) {
     case ORDER_BY_NAME:
       const sortedName =
         action.payload === "asc"
-          ? state.totalRecipes.sort((a, b) => {
+          ? state.recipes.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
               else return -1;
             })
-          : state.totalRecipes.sort((a, b) => {
+          : state.recipes.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
               else return 1;
             });
@@ -107,6 +108,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         detail: action.payload,
+      };
+
+    case CLEAN_DETAILS:
+      return {
+        ...state,
+        detail: [],
       };
 
     default:

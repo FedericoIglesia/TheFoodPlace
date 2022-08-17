@@ -12,6 +12,7 @@ function control(input) {
   let invalidValues = {};
   if (!input.name) {
     invalidValues.name = "Please complete the name of the recipe";
+    // delete invalidValues.name;
   }
   if (!input.summary) {
     invalidValues.summary = "Please complete a summary of your dish";
@@ -78,21 +79,22 @@ export default function RecipeCreation() {
   // At the moment of submit i'll check if there's an existing recipe in our global state that matches the one being submitted. If there is, i'll advise the user that it's a duplicate and will not be posted. This is consistent with the duplicate check i did on my backend post route.
   function handleSubmit(e) {
     e.preventDefault();
-    // if (input.name === "") {
-    //   alert("Please complete the name");
-    // }
-    dispatch(postRecipe(input));
-    setInput({
-      name: "",
-      summary: "",
-      healthScore: 0,
-      steps: "",
-      diet: [],
-    });
+    if (input.name === "") {
+      alert("Please complete the name");
+    } else {
+      dispatch(postRecipe(input));
+      setInput({
+        name: "",
+        summary: "",
+        healthScore: 0,
+        steps: "",
+        diet: [],
+      });
 
-    if (!recipes.some((r) => r.name.includes(input.name))) {
-      setPosted("success");
-    } else setPosted("duplicate");
+      if (!recipes.some((r) => r.name.includes(input.name))) {
+        setPosted("success");
+      } else setPosted("duplicate");
+    }
 
     // setTimeout(() => {
     //   history.push("/home");
@@ -139,7 +141,6 @@ export default function RecipeCreation() {
                   key={1}
                   onChange={(e) => handleChange(e)}
                   placeholder="Name of your recipe"
-                  required
                 />
               </label>
               {invalidValues.name && (
@@ -214,7 +215,7 @@ export default function RecipeCreation() {
                 </p>
               )}
             </div>
-            {Object.keys(invalidValues).length && input.diet.length ? (
+            {Object.keys(invalidValues).length > 0 && input.diet.length ? (
               <button className={r["form-btn-submit"]} type="submit">
                 Submit Recipe
               </button>
