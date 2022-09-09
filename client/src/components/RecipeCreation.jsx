@@ -6,6 +6,7 @@ import { postRecipe, getDiets, getRecipes } from "../actions/index";
 import RecipeSubmit from "./RecipeSubmit";
 import DuplicateNote from "./DuplicateNote";
 import * as r from "./RecipeCreation.module.css";
+import Swal from "sweetalert2";
 
 //Creating a controlling function to prevent the user from submitting an invalid post
 function control(input) {
@@ -80,7 +81,7 @@ export default function RecipeCreation() {
   function handleSubmit(e) {
     e.preventDefault();
     if (input.name === "") {
-      alert("Please complete the name");
+      Swal.fire("Please complete the name");
     } else {
       dispatch(postRecipe(input));
       setInput({

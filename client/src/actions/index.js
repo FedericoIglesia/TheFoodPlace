@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 export const GET_RECIPES = "GET_RECIPES";
 export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
@@ -57,10 +58,15 @@ export function searchRecipes(name) {
       });
     } catch (err) {
       // alert("No recipes with that name");
-      console.log("No recipes with that name ---->  " + err);
-      return dispatch({
-        type: SEARCH_NAME_RECIPES_REJECTED,
-        payload: "ERR",
+      // console.log("No recipes with that name ---->  " + err);
+      // return dispatch({
+      //   type: SEARCH_NAME_RECIPES_REJECTED,
+      //   payload: "ERR",
+      // });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There's no recipe with that name",
       });
     }
   };
